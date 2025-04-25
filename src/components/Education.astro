@@ -1,0 +1,173 @@
+---
+// src/components/Education.astro
+import hullUniversityLogo from '../assets/hull-university.jpg';
+import wilberforceCollegeLogo from '../assets/wilberforce-college.jpg';
+
+const educationHistory = [
+  {
+    institution: "University of Hull",
+    qualification: "MSc Artificial Intelligence",
+    field: "Artificial Intelligence",
+    dates: "Sep 2023 - May 2025",
+    skills: ["Data Science", "Python (Programming Language)", "Artificial Intelligence (AI)", "Machine Learning", "Data Analysis"],
+    logo: hullUniversityLogo
+  },
+  {
+    institution: "University of Hull",
+    qualification: "Bachelor's degree",
+    field: "Computer Science",
+    dates: "Sep 2019 - May 2023",
+    skills: ["Computer Literacy", "C++", "Java", "Mobile Game Development", "Rust", "Artificial Intelligence (AI)", "Networking", "C#", "Game Development"],
+    logo: hullUniversityLogo
+  },
+  {
+    institution: "Wilberforce College",
+    qualification: "BTEC Ext. Dip. ICT",
+    field: "Games Design and Development",
+    dates: "2017 - 2019",
+    skills: ["Computer Literacy", "Game Design", "Networking", "Game Development"],
+    logo: wilberforceCollegeLogo
+  }
+];
+---
+
+<div class="education-container">
+  {educationHistory.map(entry => (
+    <div class="education-entry">
+      <div class="entry-header">
+        <img src={entry.logo.src} alt={`${entry.institution} logo`} class="logo" loading="lazy" />
+        <div class="entry-details">
+          <h3>{entry.institution}</h3>
+          <p class="qualification">
+            {entry.qualification}<span>, {entry.field}</span>
+          </p>
+          <p class="dates">{entry.dates}</p>
+        </div>
+      </div>
+      {entry.skills && entry.skills.length > 0 && (
+        <div class="skills-section">
+          <h4 class="skills-title">Skills:</h4>
+          <div class="skills-list">
+            {entry.skills.map(skill => (
+              <code>{skill}</code>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
+<style>
+  .education-container {
+    /* Parent Section component handles overall width/padding */
+  }
+
+  .education-entry {
+    margin-bottom: 2.5em;
+    padding-left: 20px;
+    border-left: 4px solid;
+    border-image: var(--accent-gradient) 1;
+    position: relative;
+  }
+  .education-entry:last-child {
+    margin-bottom: 0;
+  }
+
+  .entry-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 1em;
+  }
+
+  .logo {
+    width: 50px;
+    height: auto;
+    flex-shrink: 0;
+    margin-top: 5px;
+    border-radius: 4px;
+  }
+
+  .entry-details {
+    flex-grow: 1;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 0.3em;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .qualification {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 0.2em 0;
+  }
+  .qualification span {
+    font-weight: 400;
+    color: var(--text-secondary);
+    font-size: 1rem;
+  }
+
+  .dates {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .skills-section {
+      margin-top: 1.2em;
+      padding-top: 0.8em;
+      border-top: 1px solid #eee;
+  }
+
+  .skills-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin: 0 0 0.6em 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+  }
+
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+  }
+
+  .skills-list code {
+		display: inline-block;
+		background: rgba(188, 82, 238, 0.1);
+		border-radius: 4px;
+		border: 1px solid rgba(188, 82, 238, 0.2);
+		padding: 3px 6px;
+		font-size: 0.9em;
+		font-family: 'Roboto Mono', monospace;
+		color: #8a3db8;
+		margin: 3px 3px 3px 0;
+  }
+
+  @media (max-width: 480px) {
+    .entry-header {
+        align-items: center;
+    }
+    .logo {
+        width: 40px;
+    }
+    h3 {
+        font-size: 1.2rem;
+    }
+    .qualification {
+        font-size: 1rem;
+    }
+    .qualification span {
+        font-size: 0.95rem;
+    }
+  }
+
+</style>
