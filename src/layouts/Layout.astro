@@ -36,14 +36,6 @@ const canonicalURL = Astro.request.url;
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
 
-
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono&display=swap"
-			rel="stylesheet"
-		/>
-
 		<!-- Global Styles -->
 		<style is:global>
 			:root {
@@ -208,6 +200,39 @@ const canonicalURL = Astro.request.url;
 					width: 50px;
 				}
 			}
+
+			@font-face {
+			font-display: swap;
+			font-family: 'Inter';
+			font-style: normal;
+			font-weight: 400;
+			src: url('../fonts/inter-v18-latin_latin-ext-regular.woff2') format('woff2');
+			}
+
+			@font-face {
+			font-display: swap;
+			font-family: 'Inter';
+			font-style: normal;
+			font-weight: 500;
+			src: url('../fonts/inter-v18-latin_latin-ext-500.woff2') format('woff2');
+			}
+
+			@font-face {
+			font-display: swap;
+			font-family: 'Inter';
+			font-style: normal;
+			font-weight: 700;
+			src: url('../fonts/inter-v18-latin_latin-ext-700.woff2') format('woff2');
+			}
+
+			@font-face {
+			font-display: swap;
+			font-family: 'Roboto Mono';
+			font-style: normal;
+			font-weight: 400;
+			src: url('../fonts/roboto-mono-v23-latin_latin-ext-regular.woff2') format('woff2');
+			}
+
 		</style>
 	</head>
 	<body>
