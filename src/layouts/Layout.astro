@@ -1,0 +1,254 @@
+---
+import { Image } from 'astro:assets';
+import background from '../assets/background.svg';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = Astro.request.url; // Get the current URL for canonical link
+
+---
+
+<!doctype html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		{canonicalURL && <meta property="og:url" content={canonicalURL} />}
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		{canonicalURL && <meta property="twitter:url" content={canonicalURL} />}
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Global Styles -->
+		<style is:global>
+			:root {
+				--text-primary: #111827;
+				--text-secondary: #4b5563;
+				--background-light: #ffffff;
+				--background-header: rgba(255, 255, 255, 0.85);
+				--header-shadow: rgba(0, 0, 0, 0.08);
+				--accent-primary: #3245ff;
+				--accent-secondary: #bc52ee;
+				--accent-gradient: linear-gradient(
+					83.21deg,
+					var(--accent-primary) 0%,
+					var(--accent-secondary) 100%
+				);
+				--section-padding-y: 80px;
+				--section-padding-x: 24px;
+				--section-max-width: 900px;
+				--header-height: 60px;
+				--focus-ring-color: rgba(50, 69, 255, 0.3);
+			}
+
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+
+			html {
+				scroll-behavior: smooth;
+				scroll-padding-top: var(--header-height);
+			}
+
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: 'Inter', Roboto, 'Helvetica Neue', 'Arial Nova',
+					'Nimbus Sans', Arial, sans-serif;
+				color: var(--text-primary);
+				background-color: var(--background-light);
+				line-height: 1.6;
+				overflow-x: hidden;
+			}
+
+			@keyframes subtleZoomPan {
+				0% {
+					transform: scale(1.05) translate(1%, 1%);
+				}
+				50% {
+					transform: scale(1) translate(0, 0);
+				}
+				100% {
+					transform: scale(1.05) translate(1%, 1%);
+				}
+			}
+
+			#background-container {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: -1;
+				overflow: hidden;
+			}
+
+			#background-image {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				filter: blur(100px);
+				animation: subtleZoomPan 30s infinite alternate ease-in-out;
+			}
+
+			#page-container {
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
+
+			main {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				flex-grow: 1;
+				width: 100%;
+			}
+
+			a {
+				color: var(--accent-primary);
+				text-decoration: none;
+				transition: color 0.2s;
+				font-weight: 500;
+			}
+			a:hover {
+				color: var(--accent-secondary);
+			}
+
+			.button {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 12px 24px;
+				color: white !important;
+				background: var(--accent-gradient);
+				background-size: 150% auto;
+				box-shadow:
+					inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+					inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+					0 4px 8px rgba(0, 0, 0, 0.15);
+				border-radius: 10px;
+				border: none;
+				cursor: pointer;
+				font-weight: 500;
+				text-decoration: none;
+				transition:
+					box-shadow 0.25s ease,
+					transform 0.15s ease,
+					background-position 0.4s ease;
+			}
+
+			.button:hover {
+				color: white !important;
+				box-shadow:
+					inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+					0 6px 12px rgba(0, 0, 0, 0.2);
+				transform: translateY(-2px);
+				background-position: right center;
+			}
+
+			a:focus-visible,
+			button:focus-visible,
+			input:focus-visible,
+			textarea:focus-visible {
+				outline: 2px solid var(--accent-primary);
+				outline-offset: 2px;
+				box-shadow: 0 0 0 4px var(--focus-ring-color);
+			}
+			*:focus {
+				outline: none;
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				html {
+					scroll-behavior: auto;
+				}
+
+				#background-image,
+				.content-section,
+ 				.title-accent,
+ 				.button,
+ 				.scroll-down-indicator span {
+					animation: none !important;
+					transition: none !important;
+				}
+
+				.content-section {
+					opacity: 1;
+					transform: none;
+				}
+				.title-accent {
+					width: 50px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="background-container">
+			<Image
+				id="background-image"
+				src={background}
+				alt=""
+				format="webp"
+				fetchpriority="high"
+				loading="eager"
+			/>
+		</div>
+		<div id="page-container">
+			<Header />
+			<main>
+				<slot /> {/* Page content */}
+			</main>
+			<Footer />
+		</div>
+		<script>
+			const sections = document.querySelectorAll('.content-section:not(.initial-visible)');
+
+			const sectionObserverOptions = {
+				root: null,
+				rootMargin: '0px',
+				threshold: 0.15,
+			};
+
+			const sectionObserver = new IntersectionObserver((entries, observer) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('is-visible');
+						observer.unobserve(entry.target);
+					}
+				});
+			}, sectionObserverOptions);
+
+			sections.forEach((section) => {
+				sectionObserver.observe(section);
+			});
+		</script>
+	</body>
+</html>

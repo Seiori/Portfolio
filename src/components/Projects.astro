@@ -1,0 +1,129 @@
+<div class="project">
+	<h3>Mosgi - League of Legends Data Analysis Site</h3>
+	<p>
+		A full-stack application built with Next.js, React, and Tailwind CSS.
+		Provides data analysis and insights for League of Legends players using
+		official Riot API data. Features include user profiles, match history,
+		and performance metrics. The site is designed to be responsive and user-friendly.
+	</p>
+	<code>Next.js</code> <code>React</code> <code>Tailwind CSS</code> <code>MySQL</code>
+	<div class="project-links">
+		<a href="https://mosgi.org/" target="_blank" rel="noopener noreferrer" class="button">View Site</a>
+		<a href="https://github.com/Seiori/Mosgi" target="_blank" rel="noopener noreferrer" class="button">View Code</a>
+	</div>
+</div>
+<div class="project">
+	<h3>MySQL Bulk Operations - Extension Methods for EFCore</h3>
+	<p>
+		A library that provides extension methods for Entity Framework Core to
+		simplify bulk operations with MySQL. It includes methods for bulk insert,
+		update, and delete operations, improving performance and reducing code complexity.
+	</p>
+	<code>C#</code> <code>Entity Framework Core</code> <code>MySQL</code>
+	<div class="project-links">
+		<a href="https://github.com/Seiori/MySql-Bulk-Operations" target="_blank" rel="noopener noreferrer" class="button">View Code</a>
+	</div>
+</div>
+<div class="project">
+	<h3>Statikk-Scraper - Riot API Data Gathering Tool</h3>
+	<p>
+		A tool for gathering data from the Riot API, designed to be fast and efficient.
+		It uses a custom-built API wrapper to interact with the Riot API and store data
+		in a MySQL database. The tool is built with C# and is designed to be easy to use
+		and extendable for future features.
+	</p>
+	<code>C#</code> <code>MySQL</code>
+	<div class="project-links">
+		<a href="https://github.com/Seiori/Statikk-Scraper" target="_blank" rel="noopener noreferrer" class="button">View Code</a>
+	</div>
+</div>
+<div class="project">
+	<h3>Project Nesja - League of Legends Data Analysis Application</h3>
+	<p>
+		A desktop application for League of Legends data analysis, built with C# and WPF.
+		It provides a user-friendly interface for analyzing game data, including match history,
+		player statistics, and performance metrics. The application is designed to be fast and responsive,
+		with a focus on usability and performance.
+	</p>
+	<code>C#</code> <code>WPF</code>
+	<div class="project-links">
+		<a href="https://github.com/Seiori/Project-Nesja" target="_blank" rel="noopener noreferrer" class="button">View Code</a>
+	</div>
+</div>
+<div class="project">
+	<h3>Particle Simulation</h3>
+	<p>
+		To explore and compare different languages, I developed this particle simulation separately in C++, Rust, and Go.
+		The program simulates paint particles being emitted from three distinct spray cans towards a digital canvas,
+		handling the physics of particle landing and the visual blending of colors upon impact.
+	</p>
+	<code>C++</code> <code>Rust</code> <code>Go</code>
+	<div class="project-links">
+		<a href="https://github.com/your/particle-sim-repo" target="_blank" rel="noopener noreferrer" class="button">View Code</a>
+	</div>
+</div>
+
+<style>
+	.project {
+		margin-bottom: 2.5em;
+		padding: 20px;
+        padding-left: 25px;
+		border-left: 4px solid;
+		border-image: var(--accent-gradient) 1;
+		position: relative;
+        background-color: rgba(248, 249, 250, 0.5);
+        border-radius: 0 8px 8px 0;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-image 0.3s ease;
+	}
+    .project:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+        border-image: linear-gradient(83.21deg, var(--accent-secondary) 0%, var(--accent-primary) 100%) 1;
+    }
+	.project:last-child {
+		margin-bottom: 0;
+	}
+
+	h3 {
+		font-size: 1.3rem;
+		margin-top: 0;
+		margin-bottom: 0.6em;
+		color: var(--text-primary);
+		transition: color 0.2s ease;
+	}
+    .project:hover h3 {
+        color: var(--accent-primary);
+    }
+
+	p {
+		color: var(--text-secondary);
+		font-size: 1rem;
+		line-height: 1.7;
+		margin: 0 0 1.2em;
+		max-width: 70ch;
+	}
+
+	code {
+		display: inline-block;
+		background: rgba(188, 82, 238, 0.1);
+		border-radius: 4px;
+		border: 1px solid rgba(188, 82, 238, 0.2);
+		padding: 3px 6px;
+		font-size: 0.9em;
+		font-family: 'Roboto Mono', monospace;
+		color: #8a3db8;
+		margin: 3px 3px 3px 0;
+	}
+
+    .project-links {
+        margin-top: 1em;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+	.project-links a.button {
+		font-size: 0.9rem;
+        padding: 8px 16px;
+	}
+</style>

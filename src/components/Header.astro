@@ -1,0 +1,86 @@
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const header = document.getElementById('main-header');
+		const sections = document.querySelectorAll('section[id]');
+
+		if (!header || sections.length === 0) {
+			console.error('Header or sections not found for sticky navigation.');
+			return;
+		}
+
+		const navLinks = header.querySelectorAll<HTMLAnchorElement>('nav ul a');
+        const logoLink = header.querySelector<HTMLAnchorElement>('.logo-link'); 
+
+		const handleScroll = () => {
+			if (!header) return;
+			if (window.scrollY > 10) {
+				header.classList.add('scrolled');
+			} else {
+				header.classList.remove('scrolled');
+			}
+		};
+
+		const highlightActiveLink = (entries: IntersectionObserverEntry[]) => {
+            if (!header) return;
+
+			let currentSectionId = '';
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					if (!currentSectionId) {
+						currentSectionId = (entry.target as HTMLElement).id;
+					}
+				}
+			});
+
+			if (!currentSectionId && entries.length > 0) {
+				const lastEntry = entries[entries.length - 1];
+				if (lastEntry.boundingClientRect.top < window.innerHeight / 2) {
+					currentSectionId = (lastEntry.target as HTMLElement).id;
+				}
+			}
+
+			if (window.scrollY < window.innerHeight * 0.5 && !currentSectionId) {
+				currentSectionId = 'hero';
+			}
+
+			navLinks.forEach((link) => {
+				link.classList.remove('active');
+				if (link.getAttribute('href')?.substring(1) === currentSectionId) {
+					link.classList.add('active');
+				}
+			});
+		};
+
+		const navObserverOptions: IntersectionObserverInit = {
+			root: null,
+			rootMargin: `-${header.offsetHeight}px 0px -${window.innerHeight * 0.5}px 0px`,
+			threshold: 0,
+		};
+
+		const navObserver = new IntersectionObserver(
+			highlightActiveLink,
+			navObserverOptions
+		);
+
+		sections.forEach((section) => navObserver.observe(section));
+		window.addEventListener('scroll', handleScroll);
+
+		handleScroll();
+
+        const initialEntries: IntersectionObserverEntry[] = Array.from(sections).map(section => {
+            const rect = section.getBoundingClientRect();
+            const isIntersecting = rect.top < (window.innerHeight * 0.5) && rect.bottom > header.offsetHeight;
+            const targetElement = section as Element;
+            return {
+                isIntersecting: isIntersecting,
+                target: targetElement,
+                boundingClientRect: rect,
+                intersectionRatio: isIntersecting ? 0.1 : 0,
+                intersectionRect: isIntersecting ? rect : new DOMRectReadOnly(),
+                rootBounds: null,
+                time: performance.now(),
+            } as IntersectionObserverEntry;
+        });
+		highlightActiveLink(initialEntries);
+	});
+</script>

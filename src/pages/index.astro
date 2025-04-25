@@ -1,16 +1,32 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+	title="Dane Gibson - Full-Stack Developer Portfolio"
+	description="Portfolio website for Dane Gibson, showcasing experience in full-stack development, personal projects, and contact information."
+>
+	<Hero />
+
+	<Section id="about" title="About Me">
+		<About />
+	</Section>
+
+	<Section id="experience" title="Experience">
+		<Experience />
+	</Section>
+
+	<Section id="projects" title="Personal Projects">
+		<Projects />
+	</Section>
+
+	<Section id="contact" title="Contact Me">
+		<Contact />
+	</Section>
+</Layout>

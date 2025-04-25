@@ -1,0 +1,98 @@
+<div class="job">
+	<h3>Graduate Developer - StyleTech Solutions (2023 - Present)</h3>
+	<ul>
+		<li>
+			Contributed to the development and maintenance of a core CRM system
+			utilizing <code>C#</code>, <code>Kendo UI</code>, and <code>Knockout.js</code>.
+		</li>
+		<li>
+			Worked within a small team to develop and maintain key e-commerce
+			components using <code>VB.NET</code>, including a multi-site web
+			application (powering 4 distinct websites) and a daily data import
+			system.
+		</li>
+		<li>
+			Assisted in the development and upkeep of a bespoke Content
+			Management System (CMS) for the e-commerce platform, using <code>C#</code>,
+			<code>Knockout.js</code>, and <code>Kendo UI</code>.
+		</li>
+		<li>
+			Developed and maintained related Web APIs using <code>C#</code> to
+			support e-commerce functionalities.
+		</li>
+	</ul>
+</div>
+
+<style>
+	.job {
+		margin-bottom: 2.5em;
+		padding-left: 20px;
+		border-left: 4px solid;
+		border-image: var(--accent-gradient) 1;
+		position: relative;
+		transition: border-image 0.3s ease;
+	}
+	.job:hover {
+		border-image: linear-gradient(
+				83.21deg,
+				var(--accent-secondary) 0%,
+				var(--accent-primary) 100%
+			)
+			1;
+	}
+	.job:last-child {
+		margin-bottom: 0;
+	}
+
+	h3 {
+		font-size: 1.3rem;
+		margin-top: 0;
+		margin-bottom: 0.6em;
+		color: var(--text-primary);
+		transition: color 0.2s ease;
+	}
+	.job:hover h3 {
+		color: var(--accent-primary);
+	}
+
+	ul {
+		list-style: none;
+		padding-left: 0;
+		margin-bottom: 0;
+	}
+
+	li {
+		margin-bottom: 0.7em;
+		color: var(--text-secondary);
+		position: relative;
+		padding-left: 25px;
+		line-height: 1.7;
+	}
+	li:last-child {
+		margin-bottom: 0;
+	}
+
+	li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.5em;
+		width: 8px;
+		height: 8px;
+		background: var(--accent-gradient);
+		border-radius: 50%;
+		transform: translateY(-50%);
+	}
+
+	li code {
+		display: inline-block;
+		background: rgba(188, 82, 238, 0.1);
+		border-radius: 4px;
+		border: 1px solid rgba(188, 82, 238, 0.2);
+		padding: 3px 6px;
+		font-size: 0.9em;
+		font-family: 'Roboto Mono', monospace;
+		color: #8a3db8;
+		margin: 3px 3px 3px 0;
+	}
+</style>
