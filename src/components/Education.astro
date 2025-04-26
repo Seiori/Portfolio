@@ -8,16 +8,14 @@ const educationHistory = [
     institution: "University of Hull",
     qualification: "MSc Artificial Intelligence",
     field: "Artificial Intelligence",
-    dates: "Sep 2023 - May 2025",
-    skills: ["Data Science", "Python (Programming Language)", "Artificial Intelligence (AI)", "Machine Learning", "Data Analysis"],
+    dates: "Sep 2023 - Present",
     logo: hullUniversityLogo
   },
   {
     institution: "University of Hull",
     qualification: "Bachelor's degree",
-    field: "Computer Science",
+    field: "Computer Science for Games Development",
     dates: "Sep 2019 - May 2023",
-    skills: ["Computer Literacy", "C++", "Java", "Mobile Game Development", "Rust", "Artificial Intelligence (AI)", "Networking", "C#", "Game Development"],
     logo: hullUniversityLogo
   },
   {
@@ -25,7 +23,6 @@ const educationHistory = [
     qualification: "BTEC Ext. Dip. ICT",
     field: "Games Design and Development",
     dates: "2017 - 2019",
-    skills: ["Computer Literacy", "Game Design", "Networking", "Game Development"],
     logo: wilberforceCollegeLogo
   }
 ];
@@ -35,7 +32,7 @@ const educationHistory = [
   {educationHistory.map(entry => (
     <div class="education-entry">
       <div class="entry-header">
-        <img src={entry.logo.src} alt={`${entry.institution} logo`} class="logo" loading="lazy" width="50px" height="50px" />
+        <img src={entry.logo.src} alt={`${entry.institution} logo`} class="logo" loading="lazy" />
         <div class="entry-details">
           <h3>{entry.institution}</h3>
           <p class="qualification">
@@ -44,16 +41,6 @@ const educationHistory = [
           <p class="dates">{entry.dates}</p>
         </div>
       </div>
-      {entry.skills && entry.skills.length > 0 && (
-        <div class="skills-section">
-          <h4 class="skills-title">Skills:</h4>
-          <div class="skills-list">
-            {entry.skills.map(skill => (
-              <code>{skill}</code>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   ))}
 </div>

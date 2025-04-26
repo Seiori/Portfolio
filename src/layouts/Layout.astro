@@ -10,8 +10,15 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-const canonicalURL = Astro.request.url;
 
+let canonicalURL: URL | undefined;
+if (Astro.site) {
+	canonicalURL = new URL(Astro.url.pathname, Astro.site);
+} else {
+	console.warn(
+		'Astro.site is not configured in astro.config.mjs. Canonical/Social URLs may be incorrect.'
+	);
+}
 ---
 
 <!doctype html>
@@ -20,24 +27,59 @@ const canonicalURL = Astro.request.url;
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
+
 		<title>{title}</title>
 		<meta name="description" content={description} />
 
-		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
-		{canonicalURL && <meta property="og:url" content={canonicalURL} />}
+		{canonicalURL && <meta property="og:url" content={canonicalURL.toString()} />}
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
+		{Astro.site && <meta property="og:image" content={new URL('/og-image.png', Astro.site).toString()} />}
 
-
-		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
-		{canonicalURL && <meta property="twitter:url" content={canonicalURL} />}
+		{canonicalURL && <meta property="twitter:url" content={canonicalURL.toString()} />}
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
+		{Astro.site && <meta property="twitter:image" content={new URL('/og-image.png', Astro.site).toString()} />}
 
-		<!-- Global Styles -->
 		<style is:global>
+			@font-face {
+				font-display: swap;
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 400;
+				src: url('../fonts/inter-v18-latin_latin-ext-regular.woff2')
+					format('woff2');
+			}
+
+			@font-face {
+				font-display: swap;
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 500;
+				src: url('../fonts/inter-v18-latin_latin-ext-500.woff2')
+					format('woff2');
+			}
+
+			@font-face {
+				font-display: swap;
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 700;
+				src: url('../fonts/inter-v18-latin_latin-ext-700.woff2')
+					format('woff2');
+			}
+
+			@font-face {
+				font-display: swap;
+				font-family: 'Roboto Mono';
+				font-style: normal;
+				font-weight: 400;
+				src: url('../fonts/roboto-mono-v23-latin_latin-ext-regular.woff2')
+					format('woff2');
+			}
+
 			:root {
 				--text-primary: #111827;
 				--text-secondary: #4b5563;
@@ -72,12 +114,20 @@ const canonicalURL = Astro.request.url;
 			body {
 				margin: 0;
 				padding: 0;
-				font-family: 'Inter', Roboto, 'Helvetica Neue', 'Arial Nova',
-					'Nimbus Sans', Arial, sans-serif;
+				font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+					'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+					'Helvetica Neue', sans-serif;
 				color: var(--text-primary);
 				background-color: var(--background-light);
 				line-height: 1.6;
 				overflow-x: hidden;
+			}
+
+			pre,
+			code {
+				font-family: 'Roboto Mono', ui-monospace, 'Cascadia Code',
+					'Source Code Pro', Menlo, Consolas, 'Liberation Mono',
+					'Courier New', monospace;
 			}
 
 			@keyframes subtleZoomPan {
@@ -139,7 +189,7 @@ const canonicalURL = Astro.request.url;
 				align-items: center;
 				justify-content: center;
 				padding: 12px 24px;
-				color: white !important;
+				color: white;
 				background: var(--accent-gradient);
 				background-size: 150% auto;
 				box-shadow:
@@ -157,14 +207,23 @@ const canonicalURL = Astro.request.url;
 					background-position 0.4s ease;
 			}
 
-			.button:hover {
-				color: white !important;
+			a.button:hover {
+				color: white;
 				box-shadow:
 					inset 0 0 0 1px rgba(255, 255, 255, 0.1),
 					0 6px 12px rgba(0, 0, 0, 0.2);
 				transform: translateY(-2px);
 				background-position: right center;
 			}
+			.button:hover {
+				color: white;
+				box-shadow:
+					inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+					0 6px 12px rgba(0, 0, 0, 0.2);
+				transform: translateY(-2px);
+				background-position: right center;
+			}
+
 
 			a:focus-visible,
 			button:focus-visible,
@@ -174,6 +233,7 @@ const canonicalURL = Astro.request.url;
 				outline-offset: 2px;
 				box-shadow: 0 0 0 4px var(--focus-ring-color);
 			}
+
 			*:focus {
 				outline: none;
 			}
@@ -185,9 +245,9 @@ const canonicalURL = Astro.request.url;
 
 				#background-image,
 				.content-section,
- 				.title-accent,
- 				.button,
- 				.scroll-down-indicator span {
+				.title-accent,
+				.button,
+				.scroll-down-indicator span {
 					animation: none !important;
 					transition: none !important;
 				}
@@ -200,39 +260,6 @@ const canonicalURL = Astro.request.url;
 					width: 50px;
 				}
 			}
-
-			@font-face {
-			font-display: swap;
-			font-family: 'Inter';
-			font-style: normal;
-			font-weight: 400;
-			src: url('../fonts/inter-v18-latin_latin-ext-regular.woff2') format('woff2');
-			}
-
-			@font-face {
-			font-display: swap;
-			font-family: 'Inter';
-			font-style: normal;
-			font-weight: 500;
-			src: url('../fonts/inter-v18-latin_latin-ext-500.woff2') format('woff2');
-			}
-
-			@font-face {
-			font-display: swap;
-			font-family: 'Inter';
-			font-style: normal;
-			font-weight: 700;
-			src: url('../fonts/inter-v18-latin_latin-ext-700.woff2') format('woff2');
-			}
-
-			@font-face {
-			font-display: swap;
-			font-family: 'Roboto Mono';
-			font-style: normal;
-			font-weight: 400;
-			src: url('../fonts/roboto-mono-v23-latin_latin-ext-regular.woff2') format('woff2');
-			}
-
 		</style>
 	</head>
 	<body>
@@ -244,36 +271,49 @@ const canonicalURL = Astro.request.url;
 				format="webp"
 				fetchpriority="high"
 				loading="eager"
+			    quality={50}
 			/>
 		</div>
 		<div id="page-container">
 			<Header />
 			<main>
-				<slot /> {/* Page content */}
+				<slot />
 			</main>
 			<Footer />
 		</div>
 		<script>
-			const sections = document.querySelectorAll('.content-section:not(.initial-visible)');
+			const sections = document.querySelectorAll(
+				'.content-section:not(.initial-visible)'
+			);
 
-			const sectionObserverOptions = {
-				root: null,
-				rootMargin: '0px',
-				threshold: 0.15,
-			};
+			if ('IntersectionObserver' in window) {
+				const sectionObserverOptions = {
+					root: null,
+					rootMargin: '0px',
+					threshold: 0.15,
+				};
 
-			const sectionObserver = new IntersectionObserver((entries, observer) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add('is-visible');
-						observer.unobserve(entry.target);
-					}
+				const sectionObserver = new IntersectionObserver(
+					(entries, observer) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								entry.target.classList.add('is-visible');
+								observer.unobserve(entry.target);
+							}
+						});
+					},
+					sectionObserverOptions
+				);
+
+				sections.forEach((section) => {
+					sectionObserver.observe(section);
 				});
-			}, sectionObserverOptions);
-
-			sections.forEach((section) => {
-				sectionObserver.observe(section);
-			});
+			} else {
+				sections.forEach((section) => {
+					section.classList.add('is-visible');
+				});
+				console.warn('IntersectionObserver not supported. Animations disabled.');
+			}
 		</script>
 	</body>
 </html>

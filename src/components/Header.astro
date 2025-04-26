@@ -1,6 +1,4 @@
 ---
-// src/components/Header.astro
-
 const navLinks = [
 	{ href: '#about', label: 'About' },
 	{ href: '#experience', label: 'Experience' },
@@ -89,7 +87,7 @@ const navLinks = [
             if (window.scrollY < headerHeight * 2 && newActiveSectionId !== 'hero') {
                  newActiveSectionId = 'hero';
             }
-            else if ((window.innerHeight + Math.ceil(window.scrollY)) >= document.body.offsetHeight - 5) { // 5px buffer from bottom
+            else if ((window.innerHeight + Math.ceil(window.scrollY)) >= document.body.offsetHeight - 5) {
                 if (sections.length > 0) {
                     newActiveSectionId = sections[sections.length - 1].id;
                 }
@@ -204,7 +202,7 @@ const navLinks = [
         color: var(--text-primary);
     }
     #menu-toggle .icon-close { display: none; }
-    #menu-toggle[aria-expanded="true"] .icon-menu { display: none; } 
+    #menu-toggle[aria-expanded="true"] .icon-menu { display: none; }
     #menu-toggle[aria-expanded="true"] .icon-close { display: block; }
 
 	#nav-list {
@@ -251,7 +249,7 @@ const navLinks = [
 		width: 100%;
 	}
 
-	@media (max-width: 850px) { 
+	@media (max-width: 850px) {
         #menu-toggle {
             display: block;
         }

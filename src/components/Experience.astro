@@ -2,8 +2,8 @@
 	<h3>Graduate Developer - StyleTech Solutions (2023 - Present)</h3>
 	<ul>
 		<li>
-			Contributed to the development and maintenance of a core CRM system
-			utilizing <code>C#</code>, <code>Kendo UI</code>, and <code>Knockout.js</code>.
+			Developed and maintained features for a core CRM system utilizing
+			<code>C#</code>, <code>Kendo UI</code>, and <code>Knockout.js</code>.
 		</li>
 		<li>
 			Worked within a small team to develop and maintain key e-commerce
@@ -12,7 +12,7 @@
 			system.
 		</li>
 		<li>
-			Assisted in the development and upkeep of a bespoke Content
+			Contributed to the development and upkeep of a bespoke Content
 			Management System (CMS) for the e-commerce platform, using <code>C#</code>,
 			<code>Knockout.js</code>, and <code>Kendo UI</code>.
 		</li>
@@ -26,17 +26,18 @@
 <style>
 	.job {
 		margin-bottom: 2.5em;
-		padding-left: 20px;
+		padding-left: 25px;
 		border-left: 4px solid;
 		border-image: var(--accent-gradient) 1;
 		position: relative;
 		transition: border-image 0.3s ease;
 	}
 	.job:hover {
+		--accent-secondary: #a855f7;
 		border-image: linear-gradient(
 				83.21deg,
-				var(--accent-secondary) 0%,
-				var(--accent-primary) 100%
+				var(--accent-secondary, #a855f7) 0%,
+				var(--accent-primary, #8a3db8) 100%
 			)
 			1;
 	}
@@ -44,55 +45,57 @@
 		margin-bottom: 0;
 	}
 
-	h3 {
+	.job h3 {
 		font-size: 1.3rem;
 		margin-top: 0;
-		margin-bottom: 0.6em;
+		margin-bottom: 0.7em;
 		color: var(--text-primary);
+		font-weight: 600;
 		transition: color 0.2s ease;
+		position: relative;
 	}
 	.job:hover h3 {
-		color: var(--accent-primary);
+		color: var(--accent-primary, #8a3db8);
 	}
 
-	ul {
+	.job ul {
 		list-style: none;
 		padding-left: 0;
 		margin-bottom: 0;
 	}
 
-	li {
-		margin-bottom: 0.7em;
+	.job li {
+		margin-bottom: 0.8em;
 		color: var(--text-secondary);
-		position: relative;
-		padding-left: 25px;
 		line-height: 1.7;
+		display: flex;
+		align-items: baseline;
 	}
-	li:last-child {
+	.job li:last-child {
 		margin-bottom: 0;
 	}
 
-	li::before {
+	.job li::before {
 		content: '';
-		position: absolute;
-		left: 0;
-		top: 0.5em;
 		width: 8px;
 		height: 8px;
-		background: var(--accent-gradient);
+		background: var(--accent-primary, #8a3db8);
 		border-radius: 50%;
-		transform: translateY(-50%);
+		flex-shrink: 0;
+		margin-right: 17px;
 	}
 
-	li code {
+	.job li code {
 		display: inline-block;
-		background: rgba(188, 82, 238, 0.1);
+		background: var(--code-bg, rgba(188, 82, 238, 0.08));
 		border-radius: 4px;
-		border: 1px solid rgba(188, 82, 238, 0.2);
-		padding: 3px 6px;
+		border: 1px solid var(--code-border, rgba(188, 82, 238, 0.15));
+		padding: 2px 6px;
 		font-size: 0.9em;
 		font-family: 'Roboto Mono', monospace;
-		color: #8a3db8;
-		margin: 3px 3px 3px 0;
+		color: var(--code-text, #8a3db8);
+		margin: 0 3px;
+		vertical-align: baseline;
+		line-height: 1.5;
 	}
 </style>

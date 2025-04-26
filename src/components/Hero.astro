@@ -92,18 +92,18 @@
 		border-radius: 12px;
 		opacity: 0;
 		animation: fadeInUp 0.8s 1s ease-out forwards;
+		display: flex;
+		justify-content: center;
 	}
 
 	.scroll-down-indicator span {
-		position: absolute;
-		top: 8px;
-		left: 50%;
-		transform: translateX(-50%);
+		margin-top: 8px;
 		width: 4px;
 		height: 8px;
 		background-color: var(--text-primary);
 		border-radius: 2px;
 		animation: bounce 2s infinite ease-out 1.5s;
+		flex-shrink: 0;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -127,8 +127,8 @@
 		.hero-content pre {
 			font-size: clamp(1.6rem, 7vw, 2.2rem);
 		}
-        .scroll-down-indicator {
-            bottom: 60px;
-        }
+		.scroll-down-indicator {
+			bottom: 60px;
+		}
 	}
 </style>
